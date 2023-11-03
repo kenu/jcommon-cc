@@ -209,12 +209,14 @@ public class BlockBorder implements BlockFrame, Serializable {
         if (!this.insets.equals(that.insets)) {
             return false;
         }
-        if (!PaintUtilities.equal(this.paint, that.paint)) {
-            return false;
-        }
-        return true;
+
+        return PaintUtilities.equal(this.paint, that.paint);
     }
 
+    @Override
+    public int hashCode() {
+        return 0;
+    }
     /**
      * Provides serialization support.
      *
