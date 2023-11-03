@@ -60,7 +60,7 @@ import org.jfree.chart.util.RectangleInsets;
 import org.jfree.chart.util.SerialUtilities;
 
 /**
- * A border for a block.  This class is immutable.
+ * A border for a block. This class is immutable.
  */
 public class BlockBorder implements BlockFrame, Serializable {
 
@@ -87,7 +87,7 @@ public class BlockBorder implements BlockFrame, Serializable {
     /**
      * Creates a new border with the specified color.
      *
-     * @param paint  the color (<code>null</code> not permitted).
+     * @param paint the color (<code>null</code> not permitted).
      */
     public BlockBorder(Paint paint) {
         this(new RectangleInsets(1, 1, 1, 1), paint);
@@ -96,9 +96,9 @@ public class BlockBorder implements BlockFrame, Serializable {
     /**
      * Creates a new border with the specified line widths (in black).
      *
-     * @param top  the width of the top border.
-     * @param left  the width of the left border.
-     * @param bottom  the width of the bottom border.
+     * @param top    the width of the top border.
+     * @param left   the width of the left border.
+     * @param bottom the width of the bottom border.
      * @param right  the width of the right border.
      */
     public BlockBorder(double top, double left, double bottom, double right) {
@@ -108,21 +108,21 @@ public class BlockBorder implements BlockFrame, Serializable {
     /**
      * Creates a new border with the specified line widths (in black).
      *
-     * @param top  the width of the top border.
-     * @param left  the width of the left border.
-     * @param bottom  the width of the bottom border.
+     * @param top    the width of the top border.
+     * @param left   the width of the left border.
+     * @param bottom the width of the bottom border.
      * @param right  the width of the right border.
      * @param paint  the border paint (<code>null</code> not permitted).
      */
     public BlockBorder(double top, double left, double bottom, double right,
-                       Paint paint) {
+            Paint paint) {
         this(new RectangleInsets(top, left, bottom, right), paint);
     }
 
     /**
      * Creates a new border.
      *
-     * @param insets  the border insets (<code>null</code> not permitted).
+     * @param insets the border insets (<code>null</code> not permitted).
      * @param paint  the paint (<code>null</code> not permitted).
      */
     public BlockBorder(RectangleInsets insets, Paint paint) {
@@ -157,8 +157,8 @@ public class BlockBorder implements BlockFrame, Serializable {
     /**
      * Draws the border by filling in the reserved space.
      *
-     * @param g2  the graphics device.
-     * @param area  the area.
+     * @param g2   the graphics device.
+     * @param area the area.
      */
     public void draw(Graphics2D g2, Rectangle2D area) {
         // this default implementation will just fill the available
@@ -194,7 +194,7 @@ public class BlockBorder implements BlockFrame, Serializable {
     /**
      * Tests this border for equality with an arbitrary instance.
      *
-     * @param obj  the object (<code>null</code> permitted).
+     * @param obj the object (<code>null</code> permitted).
      *
      * @return A boolean.
      */
@@ -209,18 +209,21 @@ public class BlockBorder implements BlockFrame, Serializable {
         if (!this.insets.equals(that.insets)) {
             return false;
         }
-        if (!PaintUtilities.equal(this.paint, that.paint)) {
-            return false;
-        }
-        return true;
+
+        return PaintUtilities.equal(this.paint, that.paint);
+    }
+
+    @Override
+    public int hashCode() {
+        return 0;
     }
 
     /**
      * Provides serialization support.
      *
-     * @param stream  the output stream.
+     * @param stream the output stream.
      *
-     * @throws IOException  if there is an I/O error.
+     * @throws IOException if there is an I/O error.
      */
     private void writeObject(ObjectOutputStream stream) throws IOException {
         stream.defaultWriteObject();
@@ -230,13 +233,13 @@ public class BlockBorder implements BlockFrame, Serializable {
     /**
      * Provides serialization support.
      *
-     * @param stream  the input stream.
+     * @param stream the input stream.
      *
-     * @throws IOException  if there is an I/O error.
-     * @throws ClassNotFoundException  if there is a classpath problem.
+     * @throws IOException            if there is an I/O error.
+     * @throws ClassNotFoundException if there is a classpath problem.
      */
     private void readObject(ObjectInputStream stream)
-        throws IOException, ClassNotFoundException {
+            throws IOException, ClassNotFoundException {
         stream.defaultReadObject();
         this.paint = SerialUtilities.readPaint(stream);
     }
