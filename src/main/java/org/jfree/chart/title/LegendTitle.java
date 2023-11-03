@@ -69,7 +69,6 @@ import java.awt.geom.Rectangle2D;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.io.Serializable;
 
 import org.jfree.chart.LegendItem;
 import org.jfree.chart.LegendItemCollection;
@@ -106,7 +105,7 @@ import org.jfree.chart.util.Size2D;
  * created to match the dataset(s).
  */
 public class LegendTitle extends Title
-        implements Cloneable, PublicCloneable, Serializable {
+        implements PublicCloneable {
 
     /** For serialization. */
     private static final long serialVersionUID = 2644010518533854633L;
@@ -488,6 +487,7 @@ public class LegendTitle extends Title
      *
      * @return The block size (in Java2D units, never <code>null</code>).
      */
+    @Override
     public Size2D arrange(Graphics2D g2, RectangleConstraint constraint) {
         Size2D result = new Size2D();
         fetchLegendItems();
@@ -586,6 +586,7 @@ public class LegendTitle extends Title
      *
      * @return A boolean.
      */
+    @Override
     public boolean equals(Object obj) {
         if (obj == this) {
             return true;
@@ -618,11 +619,14 @@ public class LegendTitle extends Title
         if (!this.hLayout.equals(that.hLayout)) {
             return false;
         }
-        if (!this.vLayout.equals(that.vLayout)) {
-            return false;
-        }
-        return true;
+        return this.vLayout.equals(that.vLayout);
     }
+    @Override
+    public int hashCode() {
+      /* ... */
+      return 0;
+    }
+    
 
     /**
      * Provides serialization support.
